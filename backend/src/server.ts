@@ -69,6 +69,5 @@ app.get("/api/user-info", async (req, res) => {
   }
 });
 
-app.listen(8080, () => {
-  console.log("[server]: Listening at http://localhost:8080");
-});
+
+export default app;
