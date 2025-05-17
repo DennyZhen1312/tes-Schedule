@@ -11,7 +11,7 @@ import OrganizationDetails from "../pages/OrganizationDetail";
 import Schedules from "../pages/Schedules";
 import PublicRoutes from "./public-router";
 import PendingRequests from "../components/PendingRequests";
-import RoleProtectedRoute from "./role-protected-router";
+// import RoleProtectedRoute from "./role-protected-router";
 import { Availability } from "../pages/Availability";
 import AddAvailability from "../pages/AddAvailability";
 import EmployeeSignUp from "../pages/EmployeeSignUp";
@@ -55,9 +55,9 @@ export const router = createBrowserRouter([
           {
             path: "/dashboard",
             element: (
-              <RoleProtectedRoute allowedRoles={["Admin", "Manager"]}>
+              // <RoleProtectedRoute allowedRoles={["Admin", "Manager"]}>
                 <Dashboard />
-              </RoleProtectedRoute>
+              // </RoleProtectedRoute>
             ),
             children: [
               {
@@ -67,9 +67,9 @@ export const router = createBrowserRouter([
               {
                 path: "create-organization",
                 element: (
-                  <RoleProtectedRoute allowedRoles={["Admin"]}>
+                  // <RoleProtectedRoute allowedRoles={["Admin"]}>
                     <CreateOrganization />
-                  </RoleProtectedRoute>
+                  // </RoleProtectedRoute>
                 ),
               },
               {
@@ -81,9 +81,9 @@ export const router = createBrowserRouter([
           {
             path: "/organizations",
             element: (
-              <RoleProtectedRoute allowedRoles={["Admin", "Manager"]}>
+              // <RoleProtectedRoute allowedRoles={["Admin", "Manager"]}>
                 <Organizations />
-              </RoleProtectedRoute>
+              // </RoleProtectedRoute>
             ),
           },
           {
