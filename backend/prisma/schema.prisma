@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Organization {
+  id        String     @id @default(uuid())
+  name      String
+  location  String
+  employees Employee[]
+  createdAt DateTime   @default(now())
+}
+
+model Employee {
+  id              String           @id @default(uuid())
+  name            String
+  email           String           @unique
+  position        String
+  createdAt       DateTime         @default(now())
+  organizationId  String?    // Make this optional with `?`
+  organization    Organization? @relation(fields: [organizationId], references: [id]) // Optional relationship
+  Availabilities  Availability[]
+  ScheduledShift  ScheduledShift[]
+  isActive        Boolean          @default(true) // <-- New field added
+}
+
+
+model PendingRequest {
+  id             String     @id @default(uuid())
+  name           String
+  email          String     @unique
+  position       String
+  organizationId String
+  createdAt      DateTime   @default(now())
+  status         String     @default("pending") // Status: pending, approved, rejected
+}
+
+model Availability {
+  id             String   @id @default(uuid())
+  employeeId     String
+  effectiveStart DateTime
+  effectiveEnd   DateTime
+  employee       Employee @relation(fields: [employeeId], references: [id])
+  createdAt      DateTime @default(now())
+  DailyAvailabilitySlot DailyAvailabilitySlot[]
+}
+
+model DailyAvailabilitySlot {
+  id             String       @id @default(uuid())
+  availabilityId String
+  day            String       // e.g., "Monday"
+  allDay         Boolean      @default(false)
+  available      Boolean      @default(false)
+  startTime      String?
+  endTime        String?
+  availability   Availability @relation(fields: [availabilityId], references: [id])
+}
+
+model ScheduledShift {
+  id          String   @id @default(uuid())
+  employeeId  String
+  employee    Employee @relation(fields: [employeeId], references: [id])
+  date        DateTime
+  startTime   String
+  endTime     String
+  createdAt   DateTime @default(now())
+}
+
