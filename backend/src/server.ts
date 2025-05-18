@@ -59,6 +59,4 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 
-app.listen(process.env.PORT, () => {
-  console.log(`[server]: Listening at http://localhost:${process.env.PORT}`);
-});
+export default app
