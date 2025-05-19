@@ -59,4 +59,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 
-export default app
+app.listen(8080, () => {
+  console.log("[server]: Listening at http://localhost:8080");
+});
