@@ -34,9 +34,9 @@ app.use(express.json());
 
 app.use("/api/admin", adminRouter);
 
-// app.use(ClerkExpressWithAuth());
+app.use(ClerkExpressWithAuth());
 
-// app.use(validateUser);
+app.use(validateUser);
 
 app.use("/api/organizations", organizationRouter);
 app.use("/api/employees", employeeRouter);
@@ -59,6 +59,4 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 
-app.listen(8080, () => {
-  console.log("[server]: Listening at http://localhost:8080");
-});
+export default app
