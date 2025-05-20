@@ -15,7 +15,11 @@
       "src": "/api/(.*)",
       "dest": "backend/src/server.ts"
     },
-     {
+    {
+      "src": "/(.*\\.[^/]+)$",
+      "dest": "frontend/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "frontend/index.html"
     }
